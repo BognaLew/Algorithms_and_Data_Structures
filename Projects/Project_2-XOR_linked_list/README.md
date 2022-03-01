@@ -1,42 +1,4 @@
 # Project 2 - XOR linked list
-Zadanie polega na implementacji listy dwukierunkowej. Klasyczna lista dwukierunkowa przechowuje w węzłach adresy następnika i poprzednika, w naszym zadaniu lista przechowuje w węzłach jedynie xor tych adresów. Pozwala to na ok. 50 zaoszczędzenie pamięci wykorzystywanej na przez struktur listy.
-
-Określenie węzeł i element listy używane są zamiennie i oznaczają to samo.
-
-Dodając nowy węzeł do listy zapisujemy w nim wartość xor poprzednika i następnika. Jeśli jest to pierwszy albo ostatni węzeł jako xor adresów wpisujemy odpowiednio adres następnika albo poprzednika ponieważ xor adresu z 0 (zero przyjmujemy jako wartość NULL) nie zmienia adresu. Z tego wynika, że musimy przechowywać wskaźnik na pierwszy oraz ostatni element listy, co pozwoli nam przeglądać listę w obydwu kierunkach. Chcąc przejść do kolejnego węzła w ustalonym kierunku jego adres odczytujemy jako xor wartości przechowywanych w aktualnym i wcześniej odwiedzonym węźle. Jak opisano wcześniej, w skrajnym węźle będzie to bezpośredni adres (ponieważ wartość hipotetycznego, nieistniejącego wcześniejszego węzła jest równa 0).
-
-W przypadku usuwania węzła należy zaktualizować wartości xor poprzednika i następnika usuwanego węzła. W przypadku usuwania skrajnego węzła istnieje tylko jeden sąsiad wymagający aktualizacji.
-
-Zadanie wymaga abyśmy dysponowali dodatkowym wskaźnikiem wskazującym aktualną wartość wykorzystywanym przez komendę ACTUAL opisaną później. W tym przypadku musimy dodatkowo przechowywać jednego z sąsiadów (następnika albo poprzednika, a najlepiej obydwu) wskaźnika wskazującego aktualną wartość. W przeciwnym przypadku nie będziemy w stanie odtworzyć ich adresów (następnika albo poprzednika elementu aktualnego). Wydawało by się, że nie dotyczy to pierwszego i ostatniego węzła ale nie jesteśmy w stanie (bez dodatkowych informacji) wywnioskować, że wskaźnik na element aktualny akurat wskazuje na jeden ze skrajnych elementów.
-
-Lista udostępnia następujące funkcjonalności powiązane z następującymi komendami:
-
-  - ACTUAL - wartość aktualnie wskazywanego elementu. Dla pustej listy jest to NULL a po dodaniu pierwszego elementu do listy ACTUAL zwraca wartość tego elementu tak długo dopóki nie zostanie przesunięty przez inne operacje.
-  - NEXT - drukuje wartość następnika ACTUAL jednocześnie ustawiając na niego ACTUAL. Jeśli ACTUAL wskazuje na ostatni element kolejki jego następnikiem będzie pierwszy element kolejki.
-  - PREV - drukuje wartość poprzednika ACTUAL jednocześnie ustawiając na niego ACTUAL. Jeśli ACTUAL wskazuje na pierwszy element kolejki jego poprzednikiem będzie ostatni element kolejki.
-  - ADD_BEG N - dodanie elementu z wartością N na początek listy.
-  - ADD_END N - dodanie elementu z wartością N na koniec listy.
-  - ADD_ACT N - dodanie elementu z wartością N jako poprzednika aktualnie wskazywanego elementu (ACTUAL).
-  - DEL_BEG - usuwa z listy pierwszy węzeł.
-  - DEL_END - usuwa z listy ostatni węzeł.
-  - DEL_VAL N – usuwa z listy wszystkie węzły których wartość równa jest N.
-  - DEL_ACT - usuwa z listy węzeł na który wskazuje ACTUAL, jednocześnie ustawiając ACTUAL na PREV. W przypadku kiedy PREV nie istnieje (ACTUAL był pierwszym elementem listy) ACTUAL pokazuje na ostatni element listy.
-  - PRINT_FORWARD - drukuje zawartość listy od pierwszego do ostatniego elementu.
-  - PRINT_BACKWARD - drukuje zawartość listy od ostatniego do pierwszego elementu.
-
-Zachowanie komend NEXT, PREV i DEL_ACT sygeruje działanie na kolejce cyklicznej w której (z wyjątkiem pustej kolejki) dla każdego węzła zawsze istnieje następnik i poprzednik. Kiedy taka kolejka posada tylko jeden element wartość xor tego węzła równa jest 0. Jednakże implementacja cyklicznej kolejki nie jest nakazana i nie jest zakazana. Możana w zamian zaimplementować dodatkową funkcjonalność komend NEXT i PREV. Będzie ona uruchamiana w momencie zaistnienia sytuacji wyjątkowej czyli wywołania NEXT gdy ACTUAL wskazuje na ostatni element kolejki lub PREV bądź DEL_ACT gdy ACTUAL wskazuje na pierwszy element kolejki nie cyklicznej.
-
-Komendy DEL_BEG, DEL_END, DEL_VAL i DEL_ACT w przypadku pustej listy nic nie usuwają. W każdym z tych przypadków usunięcie aktualnie wskazywanego elementu (komenda ACTUAL) powinno owocować przesunięciem wskaźnika aktualnie wskazywanego elementu na poprzedzający go element a jeśli taki nie istnieje na ostatni element listy.
-
-#### Wejście:
-
-Pewna liczba komend uruchamiających określone funkcjonalności na liście.
-
-#### Wyjście:
-
-Wyniki działania odpowiednich komend na liście charakteryzującej się pewnym stanem. Początkowo lista jest pusta a późniejszy jej stan zależy od kolejno wywoływanych komend. Niektóre komendy nie generują żadnego wyjścia np. (ADD_BEG, DEL_ACT) ale mają wpływ na stan listy i na kolejne komendy które wyświetlają pewne informacje np. (ACTUAL, PRINT_FORWARD).
-
-------------------------------------------------------------------------------------------------------------------------
 
 The task is based on implement a bidirectional list. A classic bidirectional list stores successor and predecessor addresses in nodes, in our task the list stores only xor of these addresses in nodes. This saves approximately 50% of memory used by the list structure.
 
@@ -74,3 +36,42 @@ A number of commands that run specific functionalities in the list.
 #### Output:
 
 The results of the operation of the appropriate commands on the list with a certain state. Initially, the list is empty and its later status depends on the commands that are previously invoked. Some commands do not generate any output, e.g. (ADD_BEG, DEL_ACT) but affect the state of the list and other commands that display certain information, e.g. (ACTUAL, PRINT_FORWARD).
+
+------------------------------------------------------------------------------------------------------------------------
+
+Zadanie polega na implementacji listy dwukierunkowej. Klasyczna lista dwukierunkowa przechowuje w węzłach adresy następnika i poprzednika, w naszym zadaniu lista przechowuje w węzłach jedynie xor tych adresów. Pozwala to na ok. 50 zaoszczędzenie pamięci wykorzystywanej na przez struktur listy.
+
+Określenie węzeł i element listy używane są zamiennie i oznaczają to samo.
+
+Dodając nowy węzeł do listy zapisujemy w nim wartość xor poprzednika i następnika. Jeśli jest to pierwszy albo ostatni węzeł jako xor adresów wpisujemy odpowiednio adres następnika albo poprzednika ponieważ xor adresu z 0 (zero przyjmujemy jako wartość NULL) nie zmienia adresu. Z tego wynika, że musimy przechowywać wskaźnik na pierwszy oraz ostatni element listy, co pozwoli nam przeglądać listę w obydwu kierunkach. Chcąc przejść do kolejnego węzła w ustalonym kierunku jego adres odczytujemy jako xor wartości przechowywanych w aktualnym i wcześniej odwiedzonym węźle. Jak opisano wcześniej, w skrajnym węźle będzie to bezpośredni adres (ponieważ wartość hipotetycznego, nieistniejącego wcześniejszego węzła jest równa 0).
+
+W przypadku usuwania węzła należy zaktualizować wartości xor poprzednika i następnika usuwanego węzła. W przypadku usuwania skrajnego węzła istnieje tylko jeden sąsiad wymagający aktualizacji.
+
+Zadanie wymaga abyśmy dysponowali dodatkowym wskaźnikiem wskazującym aktualną wartość wykorzystywanym przez komendę ACTUAL opisaną później. W tym przypadku musimy dodatkowo przechowywać jednego z sąsiadów (następnika albo poprzednika, a najlepiej obydwu) wskaźnika wskazującego aktualną wartość. W przeciwnym przypadku nie będziemy w stanie odtworzyć ich adresów (następnika albo poprzednika elementu aktualnego). Wydawało by się, że nie dotyczy to pierwszego i ostatniego węzła ale nie jesteśmy w stanie (bez dodatkowych informacji) wywnioskować, że wskaźnik na element aktualny akurat wskazuje na jeden ze skrajnych elementów.
+
+Lista udostępnia następujące funkcjonalności powiązane z następującymi komendami:
+
+  - ACTUAL - wartość aktualnie wskazywanego elementu. Dla pustej listy jest to NULL a po dodaniu pierwszego elementu do listy ACTUAL zwraca wartość tego elementu tak długo dopóki nie zostanie przesunięty przez inne operacje.
+  - NEXT - drukuje wartość następnika ACTUAL jednocześnie ustawiając na niego ACTUAL. Jeśli ACTUAL wskazuje na ostatni element kolejki jego następnikiem będzie pierwszy element kolejki.
+  - PREV - drukuje wartość poprzednika ACTUAL jednocześnie ustawiając na niego ACTUAL. Jeśli ACTUAL wskazuje na pierwszy element kolejki jego poprzednikiem będzie ostatni element kolejki.
+  - ADD_BEG N - dodanie elementu z wartością N na początek listy.
+  - ADD_END N - dodanie elementu z wartością N na koniec listy.
+  - ADD_ACT N - dodanie elementu z wartością N jako poprzednika aktualnie wskazywanego elementu (ACTUAL).
+  - DEL_BEG - usuwa z listy pierwszy węzeł.
+  - DEL_END - usuwa z listy ostatni węzeł.
+  - DEL_VAL N – usuwa z listy wszystkie węzły których wartość równa jest N.
+  - DEL_ACT - usuwa z listy węzeł na który wskazuje ACTUAL, jednocześnie ustawiając ACTUAL na PREV. W przypadku kiedy PREV nie istnieje (ACTUAL był pierwszym elementem listy) ACTUAL pokazuje na ostatni element listy.
+  - PRINT_FORWARD - drukuje zawartość listy od pierwszego do ostatniego elementu.
+  - PRINT_BACKWARD - drukuje zawartość listy od ostatniego do pierwszego elementu.
+
+Zachowanie komend NEXT, PREV i DEL_ACT sygeruje działanie na kolejce cyklicznej w której (z wyjątkiem pustej kolejki) dla każdego węzła zawsze istnieje następnik i poprzednik. Kiedy taka kolejka posada tylko jeden element wartość xor tego węzła równa jest 0. Jednakże implementacja cyklicznej kolejki nie jest nakazana i nie jest zakazana. Możana w zamian zaimplementować dodatkową funkcjonalność komend NEXT i PREV. Będzie ona uruchamiana w momencie zaistnienia sytuacji wyjątkowej czyli wywołania NEXT gdy ACTUAL wskazuje na ostatni element kolejki lub PREV bądź DEL_ACT gdy ACTUAL wskazuje na pierwszy element kolejki nie cyklicznej.
+
+Komendy DEL_BEG, DEL_END, DEL_VAL i DEL_ACT w przypadku pustej listy nic nie usuwają. W każdym z tych przypadków usunięcie aktualnie wskazywanego elementu (komenda ACTUAL) powinno owocować przesunięciem wskaźnika aktualnie wskazywanego elementu na poprzedzający go element a jeśli taki nie istnieje na ostatni element listy.
+
+#### Wejście:
+
+Pewna liczba komend uruchamiających określone funkcjonalności na liście.
+
+#### Wyjście:
+
+Wyniki działania odpowiednich komend na liście charakteryzującej się pewnym stanem. Początkowo lista jest pusta a późniejszy jej stan zależy od kolejno wywoływanych komend. Niektóre komendy nie generują żadnego wyjścia np. (ADD_BEG, DEL_ACT) ale mają wpływ na stan listy i na kolejne komendy które wyświetlają pewne informacje np. (ACTUAL, PRINT_FORWARD).
